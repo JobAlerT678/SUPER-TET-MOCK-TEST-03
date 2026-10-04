@@ -10,7 +10,7 @@ const DATA={"sections":[{"id":"general","name":"सामान्य ज्ञ�
 let state={started:false,name:'',lang:'hi',current:0,answers:{},review:{},visited:{},seconds:7200,finished:false};
 const $=id=>document.getElementById(id); const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const q=id=>DATA.questions.find(x=>x.id===id); const sectionFor=id=>DATA.sections.find(s=>s.ids.includes(id));
-function sta(){state.name=$('name').value.trim()||'Candidate';state.lang=$('pref').value;state.started=true;state.current=0;state.seconds=7200;state.visited={1:true};
+function start(){state.name=$('name').value.trim()||'Candidate';state.lang=$('pref').value;state.started=true;state.current=0;state.seconds=7200;state.visited={1:true};
  renderTest();tick();}
 function tick(){clearInterval(window.tmr);window.tmr=setInterval(()=>{if(!state.started||state.finished)return;state.seconds--;if(state.seconds<=0){state.seconds=0;finish(true)}updateTimer()},1000);updateTimer()}
 function updateTimer(){let m=Math.floor(state.seconds/60),s=state.seconds%60;let el=$('timer');if(el)el.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
